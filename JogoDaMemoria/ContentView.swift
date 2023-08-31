@@ -31,28 +31,35 @@ struct ContentView: View
 
 struct CardView: View
 {
-    
-    var isFaceUp: Bool = false;
+    //var isFaceUp: Bool = false;  (Posso fazer dos dois jeitos, já que se ele é false só pode ser bool.
+    @State var isFaceUp = false;
     
     var body: some View
     {
-        ZStack(content:
+        ZStack
         {
+            //Ao inves de var usamos let pois é uma constante e nao vai mudar seu valor
+            let base = RoundedRectangle(cornerRadius: 12);
+            
             // se nao tiver o == depois de uma var bool é pq ela sempre vem como true.
             if isFaceUp
             {
-                RoundedRectangle(cornerRadius: 12)
-                    .foregroundColor(.white)
-                RoundedRectangle(cornerRadius: 12)
-                    .strokeBorder(lineWidth: 5)
-                Text("👻").font(.largeTitle)
+                base.fill(.white);
+                base.strokeBorder(lineWidth: 2);
+                Text("👻").font(.largeTitle);
             }
             else
             {
                 RoundedRectangle(cornerRadius: 12)
             }
             
-        })
+        }
+        
+        .onTapGesture
+        {
+            //isFaceUp = !isFaceUp;
+            isFaceUp.toggle();
+        }
     }
 }
 
